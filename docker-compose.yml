@@ -4,15 +4,14 @@ services:
   db:
     container_name: pg-prod
     image: postgres:13-alpine
-    networks:
-      - prod_net_back
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: jenkins
     volumes:
-      - prod_postgresql:/var/lib/postgresql
       - prod_postgresql_data:/var/lib/postgresql/data
+    networks:
+      - prod_net_back
 
   backend:
     container_name: backend-prod
@@ -40,7 +39,7 @@ services:
     build:
       context: .
       args:
-        - WAR_FILE=frontend/target/tasks.war
+        - WAR_FILE=/frontend/target/tasks.war
         - CONTEXT=tasks
     networks:
       - prod_net_front
@@ -58,4 +57,3 @@ networks:
 volumes:
   prod_postgresql:
   prod_postgresql_data:
-
