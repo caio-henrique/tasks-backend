@@ -51,6 +51,14 @@ pipeline {
                 }
             }
         }
+        stage("Teste Funcional") {
+            steps {
+                dir('functional-test') {
+                    git credentialsId: 'github_login', url: 'https://github.com/caio-henrique/tasks-functional-test.git'
+                    sh 'mvn clean test'
+                }
+            }
+        }
     }
 }
 
