@@ -16,11 +16,12 @@ services:
   backend:
     container_name: backend-prod
     image: back_prod:build_${BUILD_NUMBER}
+    ports:
+      - 8081:8080
     build:
       context: .
       args:
         - WAR_FILE=/target/tasks-backend.war
-        - CONTEXT=tasks-backend
     networks:
       - prod_net_back
       - prod_net_front
@@ -40,7 +41,6 @@ services:
       context: .
       args:
         - WAR_FILE=/frontend/target/tasks.war
-        - CONTEXT=tasks
     networks:
       - prod_net_front
     ports:
