@@ -16,8 +16,6 @@ services:
   backend:
     container_name: backend-prod
     image: back_prod:build_${BUILD_NUMBER}
-    ports:
-      - 8081:8080
     build:
       context: .
       args:
